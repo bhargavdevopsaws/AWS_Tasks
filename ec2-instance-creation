@@ -1,0 +1,23 @@
+provider "aws" {
+
+  region     = "ap-south-1"
+}
+
+resource "aws_instance" "prod_server" {
+  ami           = "ami-0cd59ecaf368e5ccf"
+  instance_type = "t2.medium"
+  count = 4
+  key_name = "EC2_terraform"
+  tags = {
+    Name = "prod_server"
+  }
+} 
+resource "aws_instance" "test_server" {
+  ami           = "ami-0cd59ecaf368e5ccf"
+  instance_type = "t2.micro"
+  count = 2
+  key_name = "EC2_terraform"
+  tags = {
+    Name = "test_server"
+  }
+}
