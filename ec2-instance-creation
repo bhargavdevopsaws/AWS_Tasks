@@ -1,11 +1,15 @@
+Create a directory for the terraform project and create a terraform configuration file(main.tf) in that directory. In this file, you define AWS provider and resources to create the EC2 instance.
+
+Example to create EC2 instances to deploy production servers and test servers required for a project.
+
 provider "aws" {
 
-  region     = "ap-south-1"
+  region     = "ap-south-1"      #set the desired AWS regioen
 }
 
 resource "aws_instance" "prod_server" {
-  ami           = "ami-0cd59ecaf368e5ccf"
-  instance_type = "t2.medium"
+  ami           = "ami-0cd59ecaf368e5ccf"     #Specify an appropriate AMI ID
+  instance_type = "t2.medium"   #Specify required instance type
   count = 4
   key_name = "EC2_terraform"
   tags = {
@@ -20,4 +24,15 @@ resource "aws_instance" "test_server" {
   tags = {
     Name = "test_server"
   }
-}
+
+Follow the steps to create the instances:
+In the terminal, connect to the directory containing the terraform configuration files and run:
+
+terraform init: This command initialises the working directory, and downloads the required provider plugins. 
+
+terraform apply: Terraform displays the plan of the changes required to make, review the plan and type "yes" and apply it.
+
+* After terraform completes the process of provisioning and we can verify the resources created in the AWS console.
+
+
+
