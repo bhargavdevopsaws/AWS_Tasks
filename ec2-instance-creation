@@ -11,7 +11,7 @@ resource "aws_instance" "prod_server" {
   ami           = "ami-0cd59ecaf368e5ccf"     #Specify an appropriate AMI ID
   instance_type = "t2.medium"   #Specify required instance type
   count = 4
-  key_name = "EC2_terraform"
+  key_name = "Amazon"
   tags = {
     Name = "prod_server"
   }
@@ -20,7 +20,7 @@ resource "aws_instance" "test_server" {
   ami           = "ami-0cd59ecaf368e5ccf"
   instance_type = "t2.micro"
   count = 2
-  key_name = "EC2_terraform"
+  key_name = "Amazon"
   tags = {
     Name = "test_server"
   }
