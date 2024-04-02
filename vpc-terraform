@@ -19,3 +19,25 @@ Our architecture contains two types of subnets – public and private. Public su
 An internet gateway is deployed and associated with the VPC to enable internet traffic within the VPC’s public subnets. Only one internet gateway can be associated with each VPC. Owing to this, and the fact that there is usually a default internet address (0.0.0.0/0) pointing to the internet gateway, as a best practice, it is recommended to create a second route table.
 
 Thus apart from the main route table, our architecture consists of a second route table to which public subnets are associated.
+
+
+
+1) Create a VPC:
+To begin with, defining VPC resource in Terraform. 
+To specify a range of IP addresses in a VPC, a CIDR block needs to be provided.
+We need to provide a Name tag for identification.
+
+resource "aws_vpc" "main" {
+ cidr_block = "10.0.0.0/16"
+ 
+ tags = {
+   Name = "Project VPC"
+ }
+}
+
+Applying this configuration, since we are creating a VPC – a main Route table, and main Network ACL is also created. 
+The VPC is also associated with a pre-existing DHCP option set. 
+
+2) Create Subnets:
+
+
