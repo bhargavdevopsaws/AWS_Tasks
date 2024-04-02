@@ -1,6 +1,6 @@
 Create a directory for the terraform project and create a terraform configuration file(main.tf) in that directory. In this file, you define AWS provider and resources to create the EC2 instance.
 
-Example to create EC2 instances to deploy production servers and test servers required for a project.
+Example: To create EC2 instances to deploy production servers and test servers required for a project.
 
 provider "aws" {
 
