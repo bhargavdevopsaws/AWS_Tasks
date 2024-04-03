@@ -39,5 +39,61 @@ Applying this configuration, since we are creating a VPC – a main Route table,
 The VPC is also associated with a pre-existing DHCP option set. 
 
 2) Create Subnets:
+The VPC exists in all avilability zonesin a regioen.
+Subnets are associated with only a single avilability zone.
 
+Tha mumbai(south-ap-1) regien has one avilability zone, and we need to create private and public subnets as per requirement.
+We have to identify the CIDR ranges to be associated with the new subnetswe need to create.
+
+Example: Based on CIDR range of the VPC, I have mentioned the CIDR ranges and defined variables in the terraform code.
+The two variables represent different lists of CIDR ranges for public and private subnets.
+
+variable "public_subnet_cidrs" {
+    type = list(string)
+    description = "public subnet CIDR values"
+    default = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+}
+
+variable "private_subnet_cidrs" {
+    type = list(string)
+    description = "private subnet CIDR values"
+    default = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+}
+
+We need to write configuration for subnets. The resources should be defined for public and private subnets.
+Creating seperate resources for public and private subnets gives us the flexibility to manage them in terraform.  
+We have the created a corresponding number of subnets. 
+
+*
+The below configuration is written only for subnets to be created in a single avilability zone.
+
+resource "aws_subnet" "public_subnets" {
+ count      = length(var.public_subnet_cidrs)
+ vpc_id     = aws_vpc.main.id
+ cidr_block = element(var.public_subnet_cidrs, count.index)
+ 
+ tags = {
+   Name = "Public Subnet ${count.index + 1}"
+ }
+}
+ 
+resource "aws_subnet" "private_subnets" {
+ count      = length(var.private_subnet_cidrs)  
+ vpc_id     = aws_vpc.main.id
+ cidr_block = element(var.private_subnet_cidrs, count.index)
+ 
+ tags = {
+   Name = "Private Subnet ${count.index + 1}"
+ }
+}
+
+
+We can also have the all subnets in same avilability zones are we can create them differnt avilability zones.
+We need to create variable to store the list of avilability zones.
+
+variable "azs" {
+ type        = list(string)
+ description = "Availability Zones"
+ default     = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+}
 
