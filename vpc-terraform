@@ -88,12 +88,48 @@ resource "aws_subnet" "private_subnets" {
 }
 
 
-We can also have the all subnets in same avilability zones are we can create them differnt avilability zones.
+We can also have the all subnets in same avilability zones and also we can create them differnt avilability zones.
 We need to create variable to store the list of avilability zones.
 
 variable "azs" {
  type        = list(string)
  description = "Availability Zones"
- default     = ["eu-central-1a", "eu-central-1b", "eu-central-1c"]
+ default     = ["ap-south-1a", "ap-south-1b", "ap-south-1c"]
 }
+
+resource "aws_subnet" "public_subnets" {
+ count             = length(var.public_subnet_cidrs)
+ vpc_id            = aws_vpc.main.id
+ cidr_block        = element(var.public_subnet_cidrs, count.index)
+ availability_zone = element(var.azs, count.index)
+ 
+ tags = {
+   Name = "Public Subnet ${count.index + 1}"
+ }
+}
+ 
+resource "aws_subnet" "private_subnets" {
+ count             = length(var.private_subnet_cidrs)
+ vpc_id            = aws_vpc.main.id
+ cidr_block        = element(var.private_subnet_cidrs, count.index)
+ availability_zone = element(var.azs, count.index)
+ 
+ tags = {
+   Name = "Private Subnet ${count.index + 1}"
+ }
+}
+
+Set up Internet Gateway:
+We need internet gateway to provide access to the internet for the VPC since we have built the public subnets.
+
+We have already associated this IG with the VPC we created beforeby specifying the VPc id attributes.
+
+resource "aws_internet_gateway" "gw" {
+ vpc_id = aws_vpc.main.id
+ 
+ tags = {
+   Name = "VPC-terraform-IG"
+ }
+}
+
 
