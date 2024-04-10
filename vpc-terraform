@@ -21,6 +21,8 @@ An internet gateway is deployed and associated with the VPC to enable internet t
 Thus apart from the main route table, our architecture consists of a second route table to which public subnets are associated.
 
 
+Configuration to create VPC:
+
 resource "aws_vpc" "main" {
     cidr_block = "10.0.0.0/16"
 
