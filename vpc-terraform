@@ -3,7 +3,7 @@ There are several considerations to be made for building a VPC for any project.
 The components required for a basic target VPC design that consists of the following:
 
 VPC in AWS regioen(ap-south-1)
-1 Internet Gateway
+1 Internet Gateway 
 3 Public Subnets, one in each AZ
 3 Private Subnets, one in each AZ
 Route Table configurations (main and 2nd)
