@@ -14,7 +14,7 @@ resource "aws_instance" "prod_server" {
   key_name = "Amazon"
   tags = {
     Name = "prod_server"
-  }
+  } 
 } 
 resource "aws_instance" "test_server" {
   ami           = "ami-0cd59ecaf368e5ccf"
