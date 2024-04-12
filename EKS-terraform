@@ -1,0 +1,13 @@
+AWS EKS(Elastic Kubernetes Service) is a managed service we can use to run kubernetes on AWS without need of install, operate and to maintain your own kubernetes control Plane/Nodes.
+It scales, manages and deploys containerized applications which can run on Amazon public cloud..
+Amazon EKS runs across multiple avilability zones(AZ). AWS EKS provide highly avilable and secure clusters and automates key tasks such as patching, node provisioning and updates.
+AWS EKS are composed with:
+Control Plane: Composed of 3 master nodes, each running in a single zone or different avilablility zones(for high avilability).
+Worker Nodes: Runs on amazon EC2 instance located in a VPC, we can control and configure the VPC allocated for worker nodes.
+
+To deploy an EKS cluster with terraform we need:
+> AWS account
+> IAM credentilas and access.
+> VPC configured for EKS.
+Code text editor(VS Code).
+
