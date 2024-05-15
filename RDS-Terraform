@@ -1,0 +1,4 @@
+Prerequisites
+> Terraform CLI - To use terraform we need to install it in your local environment.
+> AWS CLI - After installation of terraform it is equally important to install AWS CLI to communicate directly with AWS environmentfrom the terminal.
+           - Run aws configure on your terminal, it will prompt to provide AWS access and secret keys for authentication, it will be connected to command line to AWS environment.
