@@ -65,10 +65,11 @@ terraform {
       version = ">= 2.0.1"
     }
   }
-
   required_version = ">= 0.14"
 }
 
+
+  
 Create a vpc.tf file, I am using AWS VPC(Virtual Private Cloud) module for the VPC creation.
 Provide the name of the VPC, CIDR range 10.0.0.0/16 and region.
 AWS VPC has 3 Private and Public subnets.
