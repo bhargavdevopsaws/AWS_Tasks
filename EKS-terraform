@@ -35,6 +35,7 @@ variable "secret_key" {
 }
 
 Create a main.tf file and name the provider and region as per the requirement.
+
 main.tf
 
 terraform {
